@@ -1,0 +1,14 @@
+SELECT EmployeeCode,LogDateTime,COUNT(LogDateTime) FROM Parallel 
+--where EmployeeCode=100319407
+GROUP BY EmployeeCode,LogDateTime
+HAVING COUNT(LogDateTime)>1
+
+ 
+
+
+delete p from Parallel p inner join 
+(
+SELECT SLNo, EmployeeCode,LogDateTime, ROW_NUMBER() over(PARTITION by EmployeeCode,LogDateTime order by LogDateTime ) as RowNo 
+FROM Parallel 
+) AS T on p.SlNo = T.SlNo
+WHERE T.RowNo>1

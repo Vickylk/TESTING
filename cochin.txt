@@ -1,0 +1,33 @@
+SELECT UserId,LogDate,C1,'',LogDate,LogDate ,
+'INSERT INTO DBO.Parallel VALUES'+'('+ UserId+','+CHAR(39)+CAST(CAST(LogDate AS DATE) AS nvarchar)+SPACE(1)+CAST(CAST(LogDate AS time) AS nvarchar)+CHAR(39)+','++CHAR(39)+C1+
++CHAR(39)+','+CHAR(39)+null+CHAR(39)+','+CHAR(39)+CAST(CAST(LogDate AS DATE) AS nvarchar)+SPACE(1)+CAST(CAST(LogDate AS time) AS nvarchar)+CHAR(39)+','++','+CHAR(39)+CAST(CAST(LogDate AS DATE)
+AS nvarchar)+SPACE(1)+CAST(CAST(LogDate AS time) AS nvarchar)+CHAR(39)+')'
+FROM 
+(
+SELECT UserId,LogDate,C1,B.*
+FROM DeviceLogs_12_2022 AS A
+LEFT JOIN
+(
+SELECT EMPLOYEECODE,LOGDATETIME,DIRECTION FROM Cochin_exports.DBO.Parallel WHERE LOGDATETIME>='2022-12-01'
+) AS B ON A.UserId=B.EMPLOYEECODE AND A.LogDate=B.LOGDATETIME
+) AS T
+WHERE T.EMPLOYEECODE IS NULL
+
+
+
+--------------------------------------------------------
+
+SELECT UserId,LogDate,C1,'',LogDate,LogDate ,
+'INSERT INTO DBO.Parallel VALUES'+'('+ UserId+','+CHAR(39)+CAST(CAST(LogDate AS DATE) AS nvarchar)+SPACE(1)+CAST(CAST(LogDate AS time) AS nvarchar)+CHAR(39)+','++CHAR(39)+C1+
++CHAR(39)+','+CHAR(39)+null+CHAR(39)+','+CHAR(39)+CAST(CAST(LogDate AS DATE) AS nvarchar)+SPACE(1)+CAST(CAST(LogDate AS time) AS nvarchar)+CHAR(39)+','++','+CHAR(39)+CAST(CAST(LogDate AS DATE)
+AS nvarchar)+SPACE(1)+CAST(CAST(LogDate AS time) AS nvarchar)+CHAR(39)+')'
+FROM 
+(
+SELECT UserId,LogDate,C1,B.*
+FROM DeviceLogs_10_2022 AS A
+LEFT JOIN
+(
+SELECT EMPLOYEECODE,LOGDATETIME,DIRECTION FROM [CAM\HRMS].CareonPayPac.DBO.Parallel WHERE LOGDATETIME>='2022-10-01'
+) AS B ON A.UserId=B.EMPLOYEECODE AND A.LogDate=B.LOGDATETIME
+) AS T
+WHERE T.EMPLOYEECODE IS NULL

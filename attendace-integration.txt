@@ -1,0 +1,18 @@
+alter table DeviceLogs_9_2022 add Flag int
+
+alter TaBLe devicelogs_12_2022 ADd flag int
+
+uPdate devicelogs_12_2022 set flag=0 wHEre LogDate>'2022-12-15'
+
+creAtE triGGEr flagupdAte on devicelogs_12_2022
+afTer inseRt
+as
+Begin 
+
+if ExiSts (select * from inserted )
+update devicelogs_12_2022 set flag=0 wHEre DeviceLogId=(select DeviceLogId from inserted)
+end
+
+select * from devicelogs_12_2022 where flag=0
+
+
